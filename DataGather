@@ -1,0 +1,41 @@
+library(readxl)
+
+ActualEarnings <- read_excel("JohnNewEarningProuject.xlsx", 
+                             sheet = "Actual")
+SurpriseEPS <- read_excel("JohnNewEarningProuject.xlsx", 
+                          sheet = "Surprise")
+SurprisePcnt <- read_excel("JohnNewEarningProuject.xlsx", 
+                           sheet = "Surprisepcnt")
+Dates <- read_excel("JohnNewEarningProuject.xlsx", 
+                    sheet = "Dates")
+StockPrice <- read_excel("JohnNewEarningProuject.xlsx", 
+                         sheet = "StockPrice")
+SP500 <- read_excel("JohnNewEarningProuject.xlsx", 
+                    sheet = "SP500")
+
+ActualEarnings <- as.data.frame(ActualEarnings)
+SurpriseEPS <- as.data.frame(SurpriseEPS)
+SurprisePcnt <- as.data.frame(SurprisePcnt)
+Dates <- as.data.frame(Dates)
+StockPrice <- as.data.frame(StockPrice)
+SP500 <- as.data.frame(SP500)
+
+rownames(ActualEarnings) <- ActualEarnings$Ticker
+ActualEarnings$Ticker <- NULL
+rownames(SurpriseEPS) <- SurpriseEPS$Ticker
+SurpriseEPS$Ticker <- NULL
+rownames(SurprisePcnt) <- SurprisePcnt$Ticker
+SurprisePcnt$Ticker <- NULL
+rownames(Dates) <- Dates$Ticker
+Dates$Ticker <- NULL
+rownames(StockPrice) <- StockPrice$Ticker
+StockPrice$Ticker <- NULL
+rownames(SP500) <- SP500$Ticker
+SP500$Ticker <- NULL
+
+ActualEarnings <- data.frame(ActualEarnings[, 39:1])
+SurpriseEPS <- data.frame(SurpriseEPS[, 39:1])
+SurprisePcnt <- data.frame(SurprisePcnt[, 39:1])
+Dates <- data.frame(Dates[, 39:1])
+StockPrice <- data.frame(StockPrice[, 39:1])
+SP500 <- data.frame(SP500[, 39:1])
