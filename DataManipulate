@@ -1,0 +1,33 @@
+library(dplyr)
+
+surprise <- -.40
+time <- 8
+
+
+ifsurprise <- as.data.frame(SurprisePcnt >= surprise & SurprisePcnt < -.30)
+
+t <- which(ifsurprise == TRUE, arr.ind = TRUE)
+t <- as.data.frame(t)
+t$col <- t$col + time
+t <- subset(t, t$col <= 39)
+t <- as.matrix(t)
+
+stockreturn <- StockPrice/lag(StockPrice, n = time) - 1
+SP500return <- SP500/lag(SP500, n = time) - 1
+alphareturn <- stockreturn - SP500return
+
+yearslaterreturn <- as.data.frame(alphareturn[t]* 100)
+
+colMeans(na.omit(yearslaterreturn))
+
+count(na.exclude(yearslaterreturn))
+
+max(na.omit(yearslaterreturn))
+
+t2 <- which(ifsurprise == TRUE, arr.ind = TRUE)
+
+nameslist <- as.data.frame(rownames(t2))
+
+datelist <- as.data.frame((Dates[t2]))
+
+list <- cbind(nameslist, datelist)
